@@ -17,16 +17,23 @@ if (isset($_SESSION['generated_password'])) {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="container mt-5">
+<div class="container mt-5">
         <div class="password-box">
             <h1 class="password-title">Generated Password</h1>
             <p class="password-text">Your generated password is:</p>
             <div class="password-display">
-                <?php echo $generated_password; ?>
+                <?php
+                session_start();
+                if (isset($_SESSION['generated_password'])) {
+                    $generated_password = $_SESSION['generated_password'];
+                    echo $generated_password;
+                } else {
+                    echo 'Password not available';
+                }
+                ?>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
