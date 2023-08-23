@@ -31,25 +31,11 @@
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (isset($_GET['password_length']) && is_numeric($_GET['password_length'])) {
                 $password_length = intval($_GET['password_length']);
+                // INCLUDE IL FILE FUNCTIONS.PHP PER OTTENERE LA FUNZIONE DI GENERAZIONE
+                include 'functions.php';
                 $generated_password = generateRandomPassword($password_length);
                 echo '<p class="mt-3">Generated Password: ' . $generated_password . '</p>';
             }
-        }
-
-        function generateRandomPassword($length) {
-            $lowercase_letters = 'abcdefghijklmnopqrstuvwxyz';
-            $uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            $numbers = '0123456789';
-            $symbols = '!@#$%^&*()-_=+[]{}|;:,.<>?';
-            $all_characters = $lowercase_letters . $uppercase_letters . $numbers . $symbols;
-            
-            $password = '';
-            for ($i = 0; $i < $length; $i++) {
-                $random_index = mt_rand(0, strlen($all_characters) - 1);
-                $password .= $all_characters[$random_index];
-            }
-            
-            return $password;
         }
         ?>
     </div>
