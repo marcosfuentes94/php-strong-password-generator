@@ -31,10 +31,14 @@
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (isset($_GET['password_length']) && is_numeric($_GET['password_length'])) {
                 $password_length = intval($_GET['password_length']);
-                // INCLUDE IL FILE FUNCTIONS.PHP PER OTTENERE LA FUNZIONE DI GENERAZIONE
                 include 'functions.php';
                 $generated_password = generateRandomPassword($password_length);
-                echo '<p class="mt-3">Generated Password: ' . $generated_password . '</p>';
+
+                session_start();
+                $_SESSION['generated_password'] = $generated_password;
+
+                header('Location: show_password.php');
+                exit();
             }
         }
         ?>
